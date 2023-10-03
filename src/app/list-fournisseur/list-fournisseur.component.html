@@ -1,0 +1,18 @@
+<div *ngFor="let f of list; index as i">
+  <fieldset
+    (dblclick)="delete(i)"
+    *ngIf="f.idFournisseur <= 100"
+    class="p-2 border danger m-2"
+    [ngClass]="f.libelle == 'hp' ? 'bg-success' : 'bg-warning'"
+  >
+    <legend class="float-none w-auto p-2">
+      idFournisseur :{{ f.idFournisseur }}
+    </legend>
+
+    <p [ngClass]="getColor(f.code) ? 'fw-bold' : 'fw-normal'">
+      code :{{ f.code }}
+    </p>
+
+    <p>libelle :{{ f.libelle }}</p>
+  </fieldset>
+</div>
