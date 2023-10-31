@@ -1,16 +1,23 @@
 <h3><u>Recherche produit</u></h3>
 <label>Code:</label>
-<input type="text" placeholder="search by code" />
+<input
+  #filter
+  type="text"
+  name="search"
+  [(ngModel)]="searchText"
+  autocomplete="off"
+  placeholder="&#61442;  searchBycode"
+/>
 <div
   class="border m-2"
-  *ngFor="let f of list; index as i"
-  [ngClass]="f.prixUnitaire <= 50 ? 'text-primary fst-italic     fs-2s' : ''"
+  *ngFor="let f of ListProduct; index as i"
+  [ngClass]="f.prixunitaire <= 50 ? 'text-primary fst-italic     fs-2s' : ''"
 >
   <ul>
     <p>
       {{ i }} .Produit:produit {{ i }}
       <button
-        [disabled]="f && f.tauxTVA == 0.02"
+        [disabled]="f && f.tauxTva == 0.02"
         (click)="AjusterTVA(i)"
         type="button"
         class="btn btn-danger"
@@ -18,13 +25,16 @@
         Ajuster TVA
       </button>
     </p>
-    <li>idProduit :{{ f.idProduit }}</li>
+    <li>idProduit :{{ f.id }}</li>
 
     <li>code :{{ f.code }}</li>
 
     <li>libelle :{{ f.libelle }}</li>
-    <li>prixUnitaire :{{ f.prixUnitaire }}</li>
-    <li>tauxTVA :{{ f.tauxTVA }}</li>
+    <li>prixUnitaire :{{ f.prixunitaire }}</li>
+    <li>tauxTVA :{{ f.tauxTva }}</li>
+    <button (click)="Calculer(f.libelle)" type="button" class="btn btn-danger">
+      calculer
+    </button>
   </ul>
 </div>
 <div class="container border">

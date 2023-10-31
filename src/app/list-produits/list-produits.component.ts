@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Produit } from '../models/produit';
+import { ProductService } from '../services/product.service';
 
 @Component({
   selector: 'app-list-produits',
@@ -7,46 +8,19 @@ import { Produit } from '../models/produit';
   styleUrls: ['./list-produits.component.css'],
 })
 export class ListProduitsComponent {
-  list: Produit[] = [
-    {
-      idProduit: 1,
-      code: 'P147852P',
-      libelle: 'Produit1',
-      prixUnitaire: 12.5,
-      tauxTVA: 0.02,
-    },
-    {
-      idProduit: 2,
-      code: 'P147552P',
-      libelle: 'Produit1',
-      prixUnitaire: 30,
-      tauxTVA: 0.198,
-    },
-    {
-      idProduit: 3,
-      code: 'D14785CC',
-      libelle: 'Produit1',
-      prixUnitaire: 20,
-      tauxTVA: 0.198,
-    },
-    {
-      idProduit: 4,
-      code: 'E147852P',
-      libelle: 'Produit1',
-      prixUnitaire: 50,
-      tauxTVA: 0.198,
-    },
-    {
-      idProduit: 5,
-      code: 'F147852P',
-      libelle: 'Produit1',
-      prixUnitaire: 70,
-      tauxTVA: 0.02,
-    },
-  ];
+  searchText!: String;
+  ListProduct!: Produit[];
+
   c = false;
+  constructor(private ps: ProductService) {}
+  ngOnInit() {
+    this.ListProduct = this.ps.getAllProducts();
+  }
   AjusterTVA(index: number) {
-    this.list[index].tauxTVA = 0.02;
+    this.ListProduct[index].tauxTva = 0.02;
     alert('TVA modifiée');
+  }
+  Calculer(libelle: string) {
+    alert(this.ps.getNbProductsByLibelle(libelle));
   }
 }

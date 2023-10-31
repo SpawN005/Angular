@@ -1,7 +1,7 @@
 export class Produit {
-  idProduit!: number;
-  code!: string;
+  id!: number;
+  code!: number;
   libelle!: string;
-  prixUnitaire!: number;
-  tauxTVA!: number;
+  prixunitaire!: number;
+  tauxTva!: number;
 }
